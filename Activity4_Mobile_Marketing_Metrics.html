@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pre-class · Mobile Marketing Metrics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#221A2E; --ink-soft:#5A5168; --ink-faint:#8B8398;
+  --surface:#FBFAFF; --card:#FFFFFF;
+  --violet:#6C3FE0; --violet-deep:#4B27A6; --violet-tint:#F1ECFE;
+  --teal:#08B89D; --teal-tint:#E2F7F3;
+  --coral:#FF6A5A; --coral-tint:#FFEDEA;
+  --amber:#E8920C; --amber-tint:#FCF0DC;
+  --red:#E5484D;
+  --line:#ECE7F4; --shadow:0 6px 24px rgba(54,30,110,.08); --shadow-lg:0 14px 40px rgba(54,30,110,.14);
+  --r:18px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0; background:var(--surface); color:var(--ink);
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif; line-height:1.62; -webkit-font-smoothing:antialiased;}
+.wrap{max-width:880px; margin:0 auto; padding:0 22px 90px;}
+h1,h2,h3,.disp{font-family:"Space Grotesk","Inter",sans-serif; letter-spacing:-.01em;}
+a{color:var(--violet-deep);}
+.eyebrow{font-family:"Space Grotesk",sans-serif; text-transform:uppercase; letter-spacing:.18em; font-size:.72rem; font-weight:600; color:var(--violet);}
+
+.hero{background:linear-gradient(150deg,#0A3B4A 0%,#1C7293 48%,#6C3FE0 125%); color:#fff; border-radius:0 0 30px 30px; padding:40px 22px 46px; position:relative; overflow:hidden;}
+.hero .inner{max-width:880px; margin:0 auto; position:relative; z-index:2;}
+.hero .eyebrow{color:#A7E8DC;}
+.hero h1{font-size:2.25rem; line-height:1.12; margin:.5rem 0 .6rem; font-weight:700;}
+.hero p.lead{color:#DBEFF3; font-size:1.05rem; max-width:60ch; margin:0;}
+.badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px;}
+.badge{background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.22); color:#fff; padding:6px 13px; border-radius:999px; font-size:.8rem; font-weight:500; backdrop-filter:blur(4px);}
+.phone-glow{position:absolute; right:-70px; top:-60px; width:260px; height:260px; border-radius:50%; background:radial-gradient(circle,rgba(8,184,157,.5),transparent 65%); filter:blur(8px); z-index:1;}
+.phone-glow.two{right:120px; top:150px; width:180px; height:180px; background:radial-gradient(circle,rgba(108,63,224,.4),transparent 65%);}
+
+.outcomes{background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.20); border-radius:16px; padding:16px 18px; margin-top:22px;}
+.outcomes b{display:block; font-family:"Space Grotesk",sans-serif; font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:#A7E8DC; margin-bottom:8px;}
+.outcomes ul{margin:0; padding-left:18px; color:#EAF7F9; font-size:.94rem;}
+.outcomes li{margin:3px 0;}
+
+section{margin-top:46px;}
+.sec-head{display:flex; align-items:center; gap:12px; margin-bottom:6px;}
+.sec-num{font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:.95rem; color:#fff; background:var(--violet); width:34px; height:34px; border-radius:11px; display:grid; place-items:center; flex:0 0 auto;}
+h2{font-size:1.5rem; margin:.1rem 0;}
+.sec-intro{color:var(--ink-soft); font-size:1.02rem; margin:.3rem 0 0;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); padding:22px 24px;}
+.note{background:var(--violet-tint); border:1px solid #E4D8FB; border-radius:14px; padding:14px 16px; font-size:.95rem; color:#3C2C66;}
+.note .lbl{font-family:"Space Grotesk",sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.1em; font-size:.7rem; color:var(--violet); display:block; margin-bottom:4px;}
+
+/* channel chips */
+.ope{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:18px;}
+.ope-col{border-radius:var(--r); padding:18px; color:#fff; box-shadow:var(--shadow);}
+.ope-col h3{margin:0; font-size:1.08rem;}
+.ope-col .tagline{font-size:.78rem; opacity:.85; font-family:"Space Grotesk",sans-serif;}
+.ope-col ul{margin:10px 0 0; padding-left:16px; font-size:.84rem;}
+.ope-col li{margin:3px 0;}
+.ope-owned{background:linear-gradient(160deg,#7B4EE6,#4B27A6);}
+.ope-paid{background:linear-gradient(160deg,#E8920C,#C2730A);}
+.ope-earned{background:linear-gradient(160deg,#0BAB91,#08866f);}
+
+/* glossary rows */
+.gloss{margin-top:16px; border:1px solid var(--line); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow);}
+.grow{display:grid; grid-template-columns:170px 1fr; border-bottom:1px solid var(--line);}
+.grow:last-child{border-bottom:none;}
+.grow .term{background:var(--violet-tint); padding:12px 15px; font-family:"Space Grotesk",sans-serif; font-weight:600; color:var(--violet-deep); font-size:.9rem;}
+.grow .def{padding:12px 15px; font-size:.88rem; color:var(--ink-soft);}
+.grow .def b{color:var(--ink);}
+
+/* WARC families */
+.fam{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:16px;}
+.fcard{background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:15px;}
+.fcard b{font-family:"Space Grotesk",sans-serif; display:block; font-size:.92rem; margin-bottom:4px;}
+.fcard .funnel{font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; font-family:"Space Grotesk",sans-serif; color:var(--teal); font-weight:600;}
+.fcard p{margin:5px 0 0; font-size:.82rem; color:var(--ink-soft);}
+
+/* vanity vs meaningful */
+.vm{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;}
+.vm-card{border-radius:var(--r); padding:18px; box-shadow:var(--shadow);}
+.vm-card h3{margin:0 0 4px; font-size:1.05rem; display:flex; align-items:center; gap:8px;}
+.vm-card .sub{font-size:.74rem; text-transform:uppercase; letter-spacing:.08em; font-family:"Space Grotesk",sans-serif; opacity:.8;}
+.vm-card ul{margin:9px 0 0; padding-left:18px; font-size:.88rem;}
+.vm-card li{margin:5px 0;}
+.vm-vanity{background:linear-gradient(160deg,#EE5A5F,#C53438); color:#fff;}
+.vm-mean{background:linear-gradient(160deg,#0BAB91,#08866f); color:#fff;}
+
+/* INTERACTIVE shell */
+.activity{background:var(--card); border:2px solid var(--violet-tint); border-radius:var(--r); box-shadow:var(--shadow); padding:22px 22px 24px; margin-top:18px;}
+.activity .a-top{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:4px;}
+.activity .a-title{font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:1.12rem; display:flex; align-items:center; gap:10px;}
+.a-icon{width:30px; height:30px; border-radius:9px; background:var(--violet); color:#fff; display:grid; place-items:center; font-size:.95rem;}
+.a-instr{color:var(--ink-soft); font-size:.92rem; margin:.2rem 0 14px;}
+.score-pill{font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:.85rem; background:var(--violet-tint); color:var(--violet-deep); padding:6px 13px; border-radius:999px; white-space:nowrap;}
+.btn{font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:.85rem; border:none; cursor:pointer; padding:9px 16px; border-radius:11px; background:var(--violet); color:#fff; transition:filter .15s ease, transform .1s ease;}
+.btn:hover{filter:brightness(1.06);} .btn:active{transform:scale(.97);}
+.btn.ghost{background:var(--violet-tint); color:var(--violet-deep);}
+.toolbar{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; align-items:center;}
+.done-msg{font-size:.9rem; font-weight:600; color:var(--teal); font-family:"Space Grotesk",sans-serif;}
+
+.match-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+.match-col h4{font-family:"Space Grotesk",sans-serif; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 9px;}
+.opt{display:block; width:100%; text-align:left; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); border-radius:12px; padding:11px 13px; margin-bottom:9px; cursor:pointer; font-size:.88rem; font-family:inherit; line-height:1.4; transition:all .14s ease;}
+.opt:hover:not(:disabled){border-color:var(--violet); background:#fff;}
+.opt:focus-visible{outline:3px solid #C9B8FF; outline-offset:2px;}
+.opt.sel{border-color:var(--violet); background:var(--violet-tint); box-shadow:0 0 0 3px rgba(108,63,224,.12);}
+.opt.matched{border-color:var(--teal); background:var(--teal-tint); color:#066b59; cursor:default;}
+.opt.matched::after{content:" ✓"; color:var(--teal); font-weight:700;}
+.opt.wrong{border-color:var(--red); background:var(--coral-tint); animation:shake .35s;}
+.opt:disabled{cursor:default;}
+.opt .pin{display:inline-block; font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:.72rem; color:#fff; background:var(--violet); border-radius:6px; padding:1px 7px; margin-right:7px; vertical-align:1px;}
+.opt.matched .pin{background:var(--teal);}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+.legend{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; font-size:.8rem;}
+.legend span{display:inline-flex; align-items:center; gap:6px; color:var(--ink-soft);}
+.legend i{width:14px; height:14px; border-radius:4px; display:inline-block;}
+.sort-item{display:flex; flex-wrap:wrap; align-items:center; gap:8px; border:1.5px solid var(--line); border-radius:12px; padding:11px 13px; margin-bottom:10px; background:var(--surface); font-size:.9rem;}
+.sort-item .txt{flex:1 1 220px; min-width:150px;}
+.cat-btns{display:flex; gap:6px; flex-wrap:wrap;}
+.cat-btn{font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:.78rem; border:1.5px solid var(--line); background:#fff; color:var(--ink-soft); padding:7px 12px; border-radius:9px; cursor:pointer; transition:all .13s ease;}
+.cat-btn:hover:not(:disabled){border-color:var(--violet); color:var(--violet);}
+.cat-btn:focus-visible{outline:3px solid #C9B8FF; outline-offset:2px;}
+.cat-btn.good{background:var(--teal); border-color:var(--teal); color:#fff;}
+.cat-btn.bad{background:var(--coral-tint); border-color:var(--red); color:var(--red); animation:shake .35s;}
+.cat-btn:disabled{cursor:default;}
+.verdict{margin-left:auto; font-size:.8rem; font-weight:600; font-family:"Space Grotesk",sans-serif;}
+.verdict.ok{color:var(--teal);}
+
+.mcq{border-bottom:1px solid var(--line); padding:16px 0;}
+.mcq:last-child{border-bottom:none;}
+.mcq .q{font-weight:600; margin:0 0 11px; font-size:.97rem;}
+.mcq .q .qn{color:var(--violet); font-family:"Space Grotesk",sans-serif; margin-right:6px;}
+.choice{display:block; width:100%; text-align:left; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); border-radius:11px; padding:10px 13px; margin-bottom:8px; cursor:pointer; font-size:.9rem; font-family:inherit; transition:all .13s ease;}
+.choice:hover:not(:disabled){border-color:var(--violet);}
+.choice:focus-visible{outline:3px solid #C9B8FF; outline-offset:2px;}
+.choice.correct{border-color:var(--teal); background:var(--teal-tint); color:#066b59; font-weight:600;}
+.choice.incorrect{border-color:var(--red); background:var(--coral-tint); color:var(--red);}
+.choice:disabled{cursor:default;}
+.explain{font-size:.86rem; color:var(--ink-soft); background:var(--violet-tint); border-radius:10px; padding:10px 13px; margin-top:4px; display:none;}
+.explain.show{display:block;}
+.explain b{color:var(--violet-deep);}
+
+.refs{font-size:.82rem; color:var(--ink-soft);}
+.refs h3{font-size:.95rem; color:var(--ink);}
+.refs ul{padding-left:18px; margin:8px 0 0;}
+.refs li{margin:5px 0;}
+.bring{background:linear-gradient(150deg,#0A3B4A,#1C7293); color:#fff; border-radius:var(--r); padding:22px 24px; margin-top:30px;}
+.bring b{font-family:"Space Grotesk",sans-serif; font-size:1.1rem; display:block; margin-bottom:6px;}
+.bring p{margin:0; color:#DBEFF3; font-size:.95rem;}
+
+@media (max-width:680px){
+  .hero h1{font-size:1.8rem;}
+  .ope,.fam,.vm,.match-grid{grid-template-columns:1fr;}
+  .grow{grid-template-columns:120px 1fr;}
+  .wrap{padding:0 16px 70px;}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important; scroll-behavior:auto !important;}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="phone-glow"></div>
+  <div class="phone-glow two"></div>
+  <div class="inner">
+    <div class="eyebrow">MKTG1419 · Week 11 · Pre-class Activity</div>
+    <h1>Mobile Marketing Metrics</h1>
+    <p class="lead">If you can't measure it, you can't improve it. Learn the key metrics across owned, paid and earned channels, the difference between meaningful and "vanity" numbers, then match metrics to what they actually measure. Quizzes are self-marked.</p>
+    <div class="badges">
+      <span class="badge">⏱ ~25 min read</span>
+      <span class="badge">🧩 3 interactive activities</span>
+      <span class="badge">📊 7-pair matching quiz</span>
+    </div>
+    <div class="outcomes">
+      <b>By the end you should be able to</b>
+      <ul>
+        <li>Define core metrics: CPI, CAC, CTR, ROAS, retention, LTV</li>
+        <li>Group metrics by owned, paid and earned channels</li>
+        <li>Tell meaningful metrics apart from "vanity" ones</li>
+        <li>Recognise why mobile attribution is hard</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- SECTION 0: WHY + CHANNELS -->
+  <section>
+    <div class="sec-head"><div class="sec-num">0</div><h2>Metrics by channel</h2></div>
+    <p class="sec-intro">Just like tactics, metrics are organised by who controls the channel. Each channel has its own signals of success.</p>
+    <div class="ope">
+      <div class="ope-col ope-owned">
+        <h3>Owned</h3><div class="tagline">App, site, wallet…</div>
+        <ul><li>App downloads &amp; retention</li><li>Conversion rate &amp; AOV</li><li>Push opt-in &amp; CTR</li><li>Wallet / loyalty redemption</li><li>QR scan rate</li></ul>
+      </div>
+      <div class="ope-col ope-paid">
+        <h3>Paid</h3><div class="tagline">Ads you buy</div>
+        <ul><li>CPM · CPC · CPI</li><li>CTR &amp; conversion rate</li><li>ROAS</li><li>Foot-traffic lift (LBA)</li><li>Opt-in / opt-out (SMS)</li></ul>
+      </div>
+      <div class="ope-col ope-earned">
+        <h3>Earned</h3><div class="tagline">Audience-driven</div>
+        <ul><li>Mentions &amp; sentiment</li><li>Shares &amp; organic reach</li><li>UGC volume</li><li>Earned media value</li><li>Reviews &amp; star rating</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: KEY METRICS GLOSSARY -->
+  <section>
+    <div class="sec-head"><div class="sec-num">1</div><h2>The metrics you must know</h2></div>
+    <p class="sec-intro">A handful of metrics show up again and again. Learn these cold.</p>
+    <div class="gloss">
+      <div class="grow"><div class="term">CPI</div><div class="def"><b>Cost per install.</b> The fixed amount paid to an ad network each time someone installs your app.</div></div>
+      <div class="grow"><div class="term">CAC</div><div class="def"><b>Customer acquisition cost.</b> The total cost of acquiring a customer — broader than CPI, it folds in all sales &amp; marketing spend.</div></div>
+      <div class="grow"><div class="term">CPM / CPC</div><div class="def"><b>Cost per 1,000 impressions</b> / <b>cost per click.</b> The price of reach and of a single tap on an ad.</div></div>
+      <div class="grow"><div class="term">CTR</div><div class="def"><b>Click-through rate.</b> The % who tap an ad or notification after seeing it. Push averages 7–10% vs ~2% for email.</div></div>
+      <div class="grow"><div class="term">Conversion rate</div><div class="def"><b>The % who complete a desired action</b> (e.g. purchase). Mobile retail averages around 3%.</div></div>
+      <div class="grow"><div class="term">Bounce rate</div><div class="def"><b>The % who leave without engaging.</b> High bounce + low dwell time signals the page isn't relevant.</div></div>
+      <div class="grow"><div class="term">Retention rate</div><div class="def"><b>The % of users who keep coming back</b> — often measured at day 1, 7 and 30 after install.</div></div>
+      <div class="grow"><div class="term">ROAS</div><div class="def"><b>Return on ad spend.</b> Revenue generated for every 1₫ spent on advertising.</div></div>
+      <div class="grow"><div class="term">LTV</div><div class="def"><b>Customer lifetime value.</b> A user's total value across their whole time as a customer — must account for CAC and ongoing costs.</div></div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: WARC FAMILIES -->
+  <section>
+    <div class="sec-head"><div class="sec-num">2</div><h2>Six families of mobile metric</h2></div>
+    <p class="sec-intro">WARC (2021) groups mobile metrics into six families. Two-thirds of marketers measure engagement most, then business and behavioural metrics.</p>
+    <div class="fam">
+      <div class="fcard"><span class="funnel">most used</span><b>Engagement</b><p>Video completion, social sharing, CTR. ⚠ Also the most common source of ad fraud.</p></div>
+      <div class="fcard"><span class="funnel">lower funnel</span><b>Behavioural</b><p>Post-click engagement, new users, site &amp; foot traffic.</p></div>
+      <div class="fcard"><span class="funnel">"hard" metrics</span><b>Business</b><p>ROI, LTV, incremental sales, revenue, profit.</p></div>
+      <div class="fcard"><span class="funnel">delivery</span><b>Audience delivery</b><p>Views, impressions, viewable impressions, spectators, participation.</p></div>
+      <div class="fcard"><span class="funnel">upper funnel</span><b>Attitudinal</b><p>Brand awareness / lift, ad-recall, top-of-mind, consideration (survey-based).</p></div>
+      <div class="fcard"><span class="funnel">social</span><b>Communications</b><p>PR value, earned media.</p></div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: VANITY VS MEANINGFUL -->
+  <section>
+    <div class="sec-head"><div class="sec-num">3</div><h2>Vanity vs meaningful metrics</h2></div>
+    <p class="sec-intro">"Vanity" metrics feel good but don't drive decisions — they create an illusion of growth without tracking real sales or revenue.</p>
+    <div class="vm">
+      <div class="vm-card vm-vanity">
+        <span class="sub">Feel-good, not actionable</span>
+        <h3>🎈 Vanity</h3>
+        <ul><li>Raw likes &amp; follower counts</li><li>Total impressions with no follow-up action</li><li>Clicks/views treated as the end goal</li></ul>
+      </div>
+      <div class="vm-card vm-mean">
+        <span class="sub">Tied to sales &amp; decisions</span>
+        <h3>🎯 Meaningful</h3>
+        <ul><li>Conversion rate &amp; ROAS</li><li>Customer lifetime value (LTV)</li><li>Revenue recovered from cart abandonment</li></ul>
+      </div>
+    </div>
+    <div class="note" style="margin-top:16px;">
+      <span class="lbl">Nuance + the bigger problem</span>
+      Clicks and views <em>are</em> useful if your goal is brand awareness — context decides. The deeper challenge is <b>attribution</b>: assigning value across many touchpoints and a fragmented mobile landscape, which makes mobile's true revenue impact hard to pin down (Bakopoulos et al., 2017).
+    </div>
+  </section>
+
+  <!-- ACTIVITY A: 7-PAIR MATCH -->
+  <section>
+    <div class="activity">
+      <div class="a-top">
+        <div class="a-title"><span class="a-icon">🧩</span> Activity A · Match the metric</div>
+        <div class="score-pill" id="scoreA">0 / 7 matched</div>
+      </div>
+      <p class="a-instr">Tap a metric on the left, then tap what it measures on the right. Correct pairs lock in green.</p>
+      <div class="match-grid">
+        <div class="match-col"><h4>Metric</h4><div id="A-terms"></div></div>
+        <div class="match-col"><h4>What it measures</h4><div id="A-defs"></div></div>
+      </div>
+      <div class="toolbar"><button class="btn ghost" onclick="MM.reset('A')">↺ Reset</button><span class="done-msg" id="doneA"></span></div>
+    </div>
+  </section>
+
+  <!-- ACTIVITY B: VANITY/MEANINGFUL SORT -->
+  <section>
+    <div class="activity">
+      <div class="a-top">
+        <div class="a-title"><span class="a-icon">📥</span> Activity B · Vanity or meaningful?</div>
+        <div class="score-pill" id="scoreV">0 / 6 sorted</div>
+      </div>
+      <p class="a-instr">For a brand chasing <b>sales and revenue</b>, decide whether each metric is mainly a vanity number or a meaningful one.</p>
+      <div class="legend">
+        <span><i style="background:#EE5A5F"></i>Vanity</span>
+        <span><i style="background:#0BAB91"></i>Meaningful</span>
+      </div>
+      <div id="V-items"></div>
+      <div class="toolbar"><button class="btn ghost" onclick="MM.resetSort('V')">↺ Reset</button><span class="done-msg" id="doneV"></span></div>
+    </div>
+  </section>
+
+  <!-- ACTIVITY C: MCQ -->
+  <section>
+    <div class="activity">
+      <div class="a-top">
+        <div class="a-title"><span class="a-icon">✅</span> Activity C · Quick checks</div>
+        <div class="score-pill" id="scoreC">0 / 4 answered</div>
+      </div>
+      <p class="a-instr">Pick the best answer for instant feedback.</p>
+      <div id="C-mcq"></div>
+    </div>
+  </section>
+
+  <!-- BRING TO CLASS -->
+  <div class="bring">
+    <b>Bring to class 💬</b>
+    <p>Pick a Vietnamese app you use. Name one owned, one paid and one earned metric you'd track for it — and one vanity metric you'd deliberately ignore. Be ready to justify why each meaningful metric beats the vanity one.</p>
+  </div>
+
+  <!-- REFERENCES -->
+  <section class="refs">
+    <h3>Key references</h3>
+    <ul>
+      <li>Bakopoulos, V., Reisman, R. &amp; Riggins, J. (2017). The state of mobile marketing measurement. <em>MMA / Marketing Science.</em></li>
+      <li>Fulgoni, G. M. (2017). Why marketers need new measures of consumer engagement. <em>Journal of Advertising Research.</em></li>
+      <li>WARC (2021). Mobile marketing metrics and measurement.</li>
+      <li>CleverTap, AppsFlyer, Adjust (n.d.) — on LTV and app metrics.</li>
+    </ul>
+    <p style="margin-top:12px;">Read beyond these bullets — review the full reference list in your Week 11 lecture notes, and cite original sources in the discussion board.</p>
+  </section>
+
+</div>
+
+<script>
+const MM = (function(){
+  function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+  const matchSets = {
+    A: [
+      {t:"CPI (cost per install)", d:"The fixed amount paid to an ad network each time the app is installed"},
+      {t:"CAC (customer acquisition cost)", d:"The total cost of acquiring one new customer — broader than just the install"},
+      {t:"ROAS (return on ad spend)", d:"The revenue generated for every 1\u20AB spent on ads"},
+      {t:"CTR (click-through rate)", d:"The % of people who tap an ad or notification after seeing it"},
+      {t:"Bounce rate", d:"The % of visitors who leave a page without engaging or converting"},
+      {t:"Retention rate", d:"The % of users who keep coming back over time (e.g. day 1/7/30)"},
+      {t:"LTV (lifetime value)", d:"A user's total value to the brand across their whole time as a customer"}
+    ]
+  };
+  const state={A:{sel:null,matched:0}};
+  function buildMatch(key){
+    const set=matchSets[key];
+    const tw=document.getElementById(key+"-terms"), dw=document.getElementById(key+"-defs");
+    tw.innerHTML=""; dw.innerHTML=""; state[key]={sel:null,matched:0};
+    set.forEach((p,i)=>{ const b=document.createElement("button"); b.className="opt"; b.type="button"; b.dataset.id=i;
+      b.innerHTML='<span class="pin">'+(i+1)+'</span>'+p.t; b.onclick=()=>selTerm(key,b,i); tw.appendChild(b); });
+    shuffle(set.map((p,i)=>i)).forEach(i=>{ const b=document.createElement("button"); b.className="opt"; b.type="button"; b.dataset.id=i;
+      b.textContent=set[i].d; b.onclick=()=>selDef(key,b,i); dw.appendChild(b); });
+    updateMatch(key);
+  }
+  function selTerm(key,btn,i){ if(btn.classList.contains("matched"))return;
+    document.querySelectorAll('#'+key+'-terms .opt').forEach(o=>o.classList.remove('sel'));
+    if(state[key].sel===i){state[key].sel=null;return;} state[key].sel=i; btn.classList.add('sel'); }
+  function selDef(key,btn,i){ if(btn.classList.contains("matched"))return;
+    const sel=state[key].sel; if(sel===null){flash(btn);return;}
+    const tb=document.querySelector('#'+key+'-terms .opt[data-id="'+sel+'"]');
+    if(sel===i){ tb.classList.remove('sel'); tb.classList.add('matched'); tb.disabled=true; btn.classList.add('matched'); btn.disabled=true;
+      state[key].sel=null; state[key].matched++; updateMatch(key); }
+    else{ btn.classList.add('wrong'); tb.classList.add('wrong'); setTimeout(()=>{btn.classList.remove('wrong');tb.classList.remove('wrong','sel');},380); state[key].sel=null; } }
+  function flash(b){b.classList.add('wrong');setTimeout(()=>b.classList.remove('wrong'),380);}
+  function updateMatch(key){ const total=matchSets[key].length;
+    document.getElementById('score'+key).textContent=state[key].matched+' / '+total+' matched';
+    document.getElementById('done'+key).textContent = state[key].matched===total ? '🎉 All matched!' : ''; }
+
+  const sorts = {
+    V: { cats:["Vanity","Meaningful"], scoreId:"scoreV", doneId:"doneV", wrapId:"V-items",
+      items: shuffle([
+        {txt:"Number of likes on a post", a:"Vanity"},
+        {txt:"Return on ad spend (ROAS)", a:"Meaningful"},
+        {txt:"Total impressions, with no action taken after", a:"Vanity"},
+        {txt:"Conversion rate", a:"Meaningful"},
+        {txt:"Raw follower count", a:"Vanity"},
+        {txt:"Customer lifetime value (LTV)", a:"Meaningful"}
+      ]) }
+  };
+  function buildSort(key){
+    const s=sorts[key]; const wrap=document.getElementById(s.wrapId); wrap.innerHTML=""; s.done=0;
+    s.items.forEach(it=>{
+      const row=document.createElement("div"); row.className="sort-item";
+      const txt=document.createElement("div"); txt.className="txt"; txt.textContent=it.txt;
+      const btns=document.createElement("div"); btns.className="cat-btns";
+      s.cats.forEach(c=>{ const cb=document.createElement("button"); cb.className="cat-btn"; cb.type="button"; cb.textContent=c;
+        cb.onclick=()=>answerSort(key,row,cb,it,c); btns.appendChild(cb); });
+      const v=document.createElement("span"); v.className="verdict";
+      row.appendChild(txt); row.appendChild(btns); row.appendChild(v); wrap.appendChild(row);
+    });
+    sortScore(key);
+  }
+  function answerSort(key,row,cb,it,c){ const s=sorts[key]; if(row.classList.contains("done"))return;
+    if(c===it.a){ cb.classList.add("good"); row.classList.add("done"); row.querySelectorAll(".cat-btn").forEach(b=>b.disabled=true);
+      const v=row.querySelector(".verdict"); v.textContent="✓ Correct"; v.classList.add("ok"); s.done=(s.done||0)+1; sortScore(key); }
+    else{ cb.classList.add("bad"); setTimeout(()=>cb.classList.remove("bad"),380); } }
+  function sortScore(key){ const s=sorts[key]; const n=s.items.length;
+    document.getElementById(s.scoreId).textContent=(s.done||0)+' / '+n+' sorted';
+    document.getElementById(s.doneId).textContent=(s.done===n)?'🎉 All sorted correctly!':''; }
+  function resetSort(key){ sorts[key].items=shuffle(sorts[key].items); buildSort(key); }
+
+  const mcq=[
+    {q:"Which channel usually has the higher click-through rate?",
+     opts:["Email (~2%)","Push notifications (~7\u201310%)","They are identical","Neither can be measured"], correct:1,
+     exp:"<b>Push notifications</b> average a 7\u201310% CTR, compared with around 2% for email."},
+    {q:"How does CAC differ from CPI?",
+     opts:["They are the same thing","CAC only counts ad-network install fees","CAC is broader — it includes all sales &amp; marketing costs to win a customer","CPI is always larger than CAC"], correct:2,
+     exp:"<b>CAC is broader.</b> CPI is the fixed install fee; CAC folds in all the spend needed to acquire a customer."},
+    {q:"A metric that feels good but doesn't help track sales or guide decisions is called a…",
+     opts:["Hard metric","Vanity metric","Business metric","Conversion metric"], correct:1,
+     exp:"<b>Vanity metric.</b> It creates an illusion of growth without tracking revenue or driving action."},
+    {q:"What is the deeper challenge in valuing mobile across a campaign?",
+     opts:["Phones are too small","Attribution across many touchpoints &amp; a fragmented landscape","There are no mobile metrics","Ads are free"], correct:1,
+     exp:"<b>Attribution.</b> Assigning value across many touchpoints and fragmented mobile contexts is the core difficulty (Bakopoulos et al., 2017)."}
+  ];
+  let mcqDone=0; const answered=new Set();
+  function buildMCQ(){
+    const wrap=document.getElementById("C-mcq"); wrap.innerHTML=""; mcqDone=0; answered.clear();
+    mcq.forEach((m,qi)=>{
+      const box=document.createElement("div"); box.className="mcq";
+      const q=document.createElement("p"); q.className="q"; q.innerHTML='<span class="qn">Q'+(qi+1)+'.</span>'+m.q; box.appendChild(q);
+      m.opts.forEach((opt,oi)=>{ const c=document.createElement("button"); c.className="choice"; c.type="button"; c.innerHTML=opt;
+        c.onclick=()=>answerMCQ(box,c,m,oi,qi); box.appendChild(c); });
+      const ex=document.createElement("div"); ex.className="explain"; ex.innerHTML=m.exp; box.appendChild(ex);
+      wrap.appendChild(box);
+    });
+    document.getElementById("scoreC").textContent="0 / "+mcq.length+" answered";
+  }
+  function answerMCQ(box,btn,m,oi,qi){
+    if(oi===m.correct){ btn.classList.add("correct"); box.querySelectorAll(".choice").forEach(c=>c.disabled=true);
+      box.querySelector(".explain").classList.add("show");
+      if(!answered.has(qi)){answered.add(qi); mcqDone++; document.getElementById("scoreC").textContent=mcqDone+" / "+mcq.length+" answered";} }
+    else{ btn.classList.add("incorrect"); btn.disabled=true; } }
+
+  document.addEventListener("DOMContentLoaded",()=>{ buildMatch("A"); buildSort("V"); buildMCQ(); });
+  return {reset:buildMatch, resetSort};
+})();
+</script>
+</body>
+</html>
